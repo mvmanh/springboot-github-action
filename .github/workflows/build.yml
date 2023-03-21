@@ -54,11 +54,23 @@ jobs:
         with:
           images: mvmanh/webapi
 
+        #Add support for more platforms with QEMU (optional)
+        # https://github.com/docker/setup-qemu-action
+      - name: Set up QEMU (more platforms)
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: all # mọi platform luôn
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
           push: true
+          platforms: linux/amd64,linux/arm64,linux/arm64/v8
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          platforms: linux/amd64,linux/arm64 # build ra 2 platform trong đó linux/amd64 là default, tương ứng với linux chạy chip intel, amd 64 bit. Còn cái còn lại là mac m1
+
+
+
