@@ -8,7 +8,7 @@ public class ProductController {
 
     @GetMapping("/")
     public String index() {
-        return "Welcome to our rest api";
+        return "Thank you for choosing our service";
     }
 
     @GetMapping("/product")
